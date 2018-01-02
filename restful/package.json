@@ -1,0 +1,27 @@
+{
+  "name": "node-app",
+  "version": "1.0.0",
+  "description": "Dockerized Node app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/savishy/node-app.git"
+  },
+  "author": "Vish",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/savishy/node-app/issues"
+  },
+  "homepage": "https://github.com/savishy/node-app",
+  "dependencies": {
+    "config.json": "0.0.4",
+    "elasticsearch": "^14.0.0",
+    "formidable": "^1.1.1",
+    "express": "3.x",
+    "console-log-level": "^1.4.0"
+  }
+}

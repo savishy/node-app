@@ -16,110 +16,77 @@ var esclient = new es.Client(
 
 var addJson = function(res) {
   fs.readFile('input.json',
-    function(err,data) {
+    async function(err,data) {
       j = JSON.parse(data);
-      createIndices();
-      // createDocuments(config.es.indices.career,j.career);
-      res.send("done\n");
+      var allIndicesCreated = await createIndices();
+      if(allIndicesCreated) {
+          var allDocsCreated = await createDocuments(config.es.indices.career,j.career);
+      }
+      res.send("result: indices created: " + allIndicesCreated + "docs created" + allDocsCreated + "\n");
     }
   );
 }
 
 /** creates indices as needed
 **/
-function createIndices() {
+async function createIndices() {
   var result = [];
   var indices = config.es.indices;
-  var indicesToCreate = config.es.indices.length;
+  var indicesToCreate = Object.keys(config.es.indices).length;
   log.debug("indicesToCreate " + indicesToCreate);
   for (var key in indices) {
-    createIndexIfNeeded(indices[key],function(result){
-      results.push(result);
-      log.debug("result:" + result);
-      if (--indicesToCreate == 0) {
-
-      }
-
-    });
+    createIndexIfNeeded(indices[key]);
   }
+
+  return new Promise(function(resolve,reject){
+    resolve(true);
+  });
 }
 
 /**
 Checks whether index is present in Elasticsearch, creates index if not.
 **/
-function createIndexIfNeeded(indexName,callback) {
-  esclient.indices.exists({index: indexName},
-    function(err,exists,status) {
-      if (exists == false) {
-        log.debug("index " + indexName + " does not exist");
-        esclient.indices.create({index: indexName},
-          function(err,resp,status) {
-            log.info("index " + indexName + " created")
-          }
-        );
-      } else {
-        log.debug("index " + indexName + " already exists, not creating");
-      }
-      callback(resp);
-    }
-  );
-}
-
-function createDocumentIfNeeded(indexName,obj,callback) {
-  log.debug(arguments.callee.name + " " + indexName + " " + JSON.stringify(obj));
-  esclient.exists({
-    index: indexName,
-    type: obj.type,
-    id: 1,
-    body: obj
-  }, function(err,resp,status){
-    if (err) {log.trace(err)};
-    if (resp == false) {
-      esclient.create({
-        index: indexName,
-        type: obj.type,
-        body: obj
-      }, callback(err,resp,status));
-    } else {
-      log.debug("document already exists");
-    }
-  });
-
-}
-
-function createDocuments(indexName,objects) {
-  var docsToAdd = objects.length;
-  objects.forEach(function(obj) {
-    log.debug("adding career: " + JSON.stringify(obj));
-    createDocumentIfNeeded(indexName,obj,function(err,resp,status){
-      if (err) { log.warn(err);}
-      else { log.debug(resp); }
-    });
-  });
-}
-
-function createDocumentsOld(indexName,obj) {
-  for (var i = 0; i < obj.length; i++) {
-    log.debug("add document item: " + JSON.stringify(obj[i]));
-    var param = {
-      index: indexName,
-      type: obj[i].type,
-      id: i,
-      body: obj[i]
-    };
-    esclient.exists(param, function(err,exists){
-      if (exists == false) {
-        log.debug("would have created " + JSON.stringify(param));
-        esclient.create(param, function(err,resp,status){
-          if (err) { log.warn(err);}
-          else { log.debug(resp); }
-        });
-      } else {
-        log.debug("document already exists");
-      }
-    });
+async function createIndexIfNeeded(indexName) {
+  var existsResponse = await esclient.indices.exists({index: indexName});
+  if (existsResponse == false) {
+    var createResponse = await esclient.indices.create({index: indexName});
+    log.debug(arguments.callee.name + " " +
+      indexName + " exists? " + existsResponse +
+      "created? " + JSON.stringify(createResponse));
   }
 }
+
+async function createDocuments(indexName,objects) {
+  log.debug(arguments.callee.name + " for: " + indexName);
+  var i = 0;
+  objects.forEach(function(obj) {
+    createDocumentIfNeeded(i,indexName,obj);
+    i++;
+  });
+
+  return new Promise(function(resolve,reject){
+    resolve(true);
+  });
+
+}
+
+async function createDocumentIfNeeded(id,indexName,obj) {
+  var param = {
+    index: indexName,
+    type: config.es.indextype,
+    id: id,
+    body: obj
+  };
+  var existsResponse = await esclient.exists(param);
+  log.debug(arguments.callee.name + " " + existsResponse);
+  if (existsResponse == false) {
+    var createResponse = await esclient.create(param);
+    log.debug(createResponse);
+  } else {
+    log.debug(arguments.callee.name + " document already exists");
+  }
+}
+
 
 
 exports.addJson = addJson;

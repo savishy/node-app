@@ -1,6 +1,7 @@
 {
   "es": {
     "host": "172.17.0.1:9200",
+    "indextype": "record",
     "indices": {
       "career":"nodeapp-career",
       "profile": "nodeapp-profile",

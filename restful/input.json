@@ -9,7 +9,7 @@
       "companyactivities": ["Consulting","Training","Certifications"],
       "worklocations": ["Bangalore"],
       "startdate": "2016-06-20",
-      "enddate": "",
+      "enddate": "2100-01-01",
       "type": "current",
       "designation": "DevOps Automation Architect",
       "domains": ["IT"],

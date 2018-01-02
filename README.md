@@ -5,7 +5,6 @@ Simple node app for personal learning.
 ## How to run
 
 ```
-npm install --save
 docker-compose up
 ```
 
@@ -15,6 +14,10 @@ Javascript:
 
 1. Parse Json in Javascript: [1](https://stackoverflow.com/questions/4935632/parse-json-in-javascript)
 1. Javascript loop through JSON array: [1](https://stackoverflow.com/a/45017172/682912)
+1. `async` and `await`:
+[1](https://developers.google.com/web/fundamentals/primers/async-functions),
+[2](https://velotio.com/blog/2017/5/30/async-your-way-out-of-hell),
+[3](https://javascript.info/async-await)
 
 Nodejs:
 
@@ -27,3 +30,4 @@ Elasticsearch and nodejs examples:
 
 1. https://stackoverflow.com/questions/37653923/how-to-send-data-to-elasticsearch-using-nodejs
 1. https://www.compose.com/articles/getting-started-with-elasticsearch-and-node/
+1. ES 6.0 does not support multiple types per index: [1](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking-changes-6.0.html) This was an issue for me because I tried creating a single index, `career` with multiple `type`s, `past` and `current`
