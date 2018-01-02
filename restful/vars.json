@@ -1,0 +1,10 @@
+{
+  "es": {
+    "host": "172.17.0.1:9200",
+    "indices": {
+      "career":"nodeapp-career",
+      "profile": "nodeapp-profile",
+      "projects": "nodeapp-projects"
+    }
+  }
+}

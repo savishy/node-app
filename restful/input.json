@@ -1,0 +1,85 @@
+{
+  "firstname": "Vishwanath",
+  "lastname": "Venugopalakrishnan",
+  "nickname": "Vish",
+  "dob": "03/03/1986",
+  "career": [
+    {
+      "company": "Agility Roots",
+      "companyactivities": ["Consulting","Training","Certifications"],
+      "worklocations": ["Bangalore"],
+      "startdate": "2016-06-20",
+      "enddate": "",
+      "type": "current",
+      "designation": "DevOps Automation Architect",
+      "domains": ["IT"],
+      "responsibilities": []
+    },
+    {
+      "company": "iCelero",
+      "companyactivities": ["Desktop Software Development","Mobile Application Development"],
+      "worklocations": ["Pune","Bangalore"],
+      "startdate": "2013-04-29",
+      "enddate": "2016-06-20",
+      "type": "past",
+      "designation": "Member Technical Staff",
+      "domains": ["IT","Mobile"],
+      "responsibilities": []
+    }
+
+  ],
+  "education": [
+
+  ],
+  "projects": [
+    {
+      "startdate":"2017-12-01",
+      "enddate":"",
+      "status": "ongoing",
+      "type": "internal",
+      "category": [],
+      "client": "",
+      "technologies": ["wordpress","composer","ansible","docker"],
+      "roles": ["Hands-on contributor"],
+      "summary": "Agility Roots Website Redesign",
+      "description": [
+        "migration of website from Rails to Wordpress",
+        "version-controlled site management with Git and Composer",
+        "conversion of web platform to docker compose service stack",
+        "ansible-based automation of infrastructure and deployment"
+      ]
+    },
+    {
+      "startdate": "2017-09-25",
+      "enddate": "2017-11-01",
+      "status": "complete",
+      "type": "client",
+      "category": [],
+      "client":"A major global Fortune 500 healthcare provider",
+      "technologies": ["docker","ansible","jenkins"],
+      "roles": ["DevOps Architect","Team Lead", "Hands-on contributor"],
+      "summary": "DevOps Vision and Strategy",
+      "description": [
+        "Worked with the VP of a major healthcare enterprise",
+        "helped them create a DevOps vision and strategy.",
+        "Worked closely with implementing engineers to identify gaps in implementing DevOps automation.",
+        "Through POCs I demonstrated alternative approaches that would realize the vision."]
+    },
+    {
+      "startdate": "2017-12-01",
+      "enddate": "",
+      "status": "ongoing",
+      "type": "personal",
+      "category": ["selflearning","hobby"],
+      "client": "",
+      "technologies": ["nodejs","lex","aws","rest"],
+      "roles":[],
+      "summary": "A Chatbot that can answer questions about Vish's professional career",
+      "description": [
+        "A chatbot that can answer typically-asked questions about myself during an interview.",
+        "For instance, this chatbot will be able to provide a summary of the technologies I have worked in."]
+    }
+  ]
+
+
+}
